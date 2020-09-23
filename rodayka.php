@@ -1,0 +1,21 @@
+<?php  
+/**
+ * Plugin Name: Rodayka
+ * Plugin URI: https://agencialaf.com
+ * Description: Este plugin é parte do ConverteFácil.
+ * Version: 1.0.0
+ * Author: Ingo Stramm
+ * Text Domain: rk
+ * License: GPLv2
+ */
+
+defined( 'ABSPATH' )or die( 'No script kiddies please!' );
+
+define( 'RK_DIR', plugin_dir_path( __FILE__ ) );
+define( 'RK_URL', plugin_dir_url( __FILE__ ) );
+
+require_once RK_DIR . 'tgm/tgm.php';
+require_once RK_DIR . 'function.php';
+require_once RK_DIR . 'cmb.php';
+require_once RK_DIR . 'shortcode.php';
+require_once RK_DIR . 'scripts.php';
