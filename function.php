@@ -18,7 +18,7 @@ function rk_send_notification() {
 
 	$user = wp_get_current_user();;
 
-	$to = 'ingo@agencialaf.com';
+	$to = $user->user_email;
 	$subject = 'Arquivos disponíveis para download';
 	$body = '
 		<h3>Olá, ' . $user->first_name . '!</h3>
@@ -26,6 +26,7 @@ function rk_send_notification() {
 	';
 	$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 	$headers[] = 'From: Rodayka <contato@rodaykasantana.com.br>';
+	$headers[] .= 'Bcc: ingo@agencialaf.com';
 	 
 	$send_email = wp_mail( $to, $subject, $body, $headers );
 
