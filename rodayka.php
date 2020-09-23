@@ -4,7 +4,7 @@
  * Plugin Name: Rodayka
  * Plugin URI: https://agencialaf.com
  * Description: Este plugin é parte do ConverteFácil.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Ingo Stramm
  * Text Domain: rk
  * License: GPLv2
