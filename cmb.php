@@ -92,12 +92,12 @@ function rk_product_metabox() {
 	) );
 
 	$cmb_product->add_field( array(
-		'name'    => esc_html__( 'Quizzes', 'rk' ),
-		'desc'    => esc_html__( 'Selecione os quizzes do produto', 'rk' ),
-		'id'      => 'rk_quizzes',
+		'name'    => esc_html__( 'Formulários', 'rk' ),
+		'desc'    => esc_html__( 'Selecione os formulários do produto', 'rk' ),
+		'id'      => 'rk_formularios',
 		'type'    => 'multicheck',
 		// 'multiple' => true, // Store values in individual rows
-		'options_cb' => 'rk_return_product_quiz_options',
+		'options_cb' => 'rk_return_product_formularios_options',
 		// 'inline'  => true, // Toggles display to inline
 	) );
 
@@ -143,13 +143,40 @@ function rk_register_theme_options_metabox() {
 	 * to be unique within this box.
 	 * Prefix is not needed.
 	 */
+    $cmb_options->add_field(array(
+        'name'             => esc_html__('Página do Questionário de Consultoria', 'rk'),
+        'desc'             => esc_html__('Selecione a página do Questionário de Consultoria', 'rk'),
+        'id'               => 'rk_questionario_consultoria_page',
+        'type'             => 'select',
+        'show_option_none' => true,
+        'options_cb'          => 'rk_return_formularios',
+    ));
+
+    $cmb_options->add_field(array(
+        'name'             => esc_html__('Página do Questionário de Consultoria com Layout', 'rk'),
+        'desc'             => esc_html__('Selecione a página do Questionário de Consultoria com Layout', 'rk'),
+        'id'               => 'rk_questionario_consultoria_layout_page',
+        'type'             => 'select',
+        'show_option_none' => true,
+        'options_cb'          => 'rk_return_formularios',
+    ));
+
+    $cmb_options->add_field(array(
+        'name'             => esc_html__('Página do Questionário de Consultoria com Layout e 3D', 'rk'),
+        'desc'             => esc_html__('Selecione a página do Questionário de Consultoria com Layout e 3D', 'rk'),
+        'id'               => 'rk_questionario_consultoria_layout_3d_page',
+        'type'             => 'select',
+        'show_option_none' => true,
+        'options_cb'          => 'rk_return_formularios',
+    ));
+
 	$cmb_options->add_field( array(
 		'name'             => esc_html__( 'Página do Book de Estilos', 'rk' ),
 		'desc'             => esc_html__( 'Selecione a página do Book de Estilos', 'rk' ),
 		'id'               => 'rk_book_estilos_page',
 		'type'             => 'select',
 		'show_option_none' => true,
-		'options_cb'          => 'rk_return_pages',
+		'options_cb'          => 'rk_return_formularios',
 	) );
 
 	$cmb_options->add_field( array(
@@ -158,7 +185,7 @@ function rk_register_theme_options_metabox() {
 		'id'               => 'rk_quiz_estilos_page',
 		'type'             => 'select',
 		'show_option_none' => true,
-		'options_cb'          => 'rk_return_pages',
+		'options_cb'          => 'rk_return_formularios',
 	) );
 
 	$cmb_options->add_field( array(
@@ -167,7 +194,7 @@ function rk_register_theme_options_metabox() {
 		'id'               => 'rk_envio_fotos_page',
 		'type'             => 'select',
 		'show_option_none' => true,
-		'options_cb'          => 'rk_return_pages',
+		'options_cb'          => 'rk_return_formularios',
 	) );
 
 	$cmb_options->add_field( array(
@@ -176,34 +203,7 @@ function rk_register_theme_options_metabox() {
 		'id'               => 'rk_envio_medidas_page',
 		'type'             => 'select',
 		'show_option_none' => true,
-		'options_cb'          => 'rk_return_pages',
-	) );
-
-	$cmb_options->add_field( array(
-		'name'             => esc_html__( 'Página do Questionário de Consultoria', 'rk' ),
-		'desc'             => esc_html__('Selecione a página do Questionário de Consultoria', 'rk' ),
-		'id'               => 'rk_questionario_consultoria_page',
-		'type'             => 'select',
-		'show_option_none' => true,
-		'options_cb'          => 'rk_return_pages',
-	) );
-
-	$cmb_options->add_field( array(
-		'name'             => esc_html__( 'Página do Questionário de Consultoria com Layout', 'rk' ),
-		'desc'             => esc_html__('Selecione a página do Questionário de Consultoria com Layout', 'rk' ),
-		'id'               => 'rk_questionario_consultoria_layout_page',
-		'type'             => 'select',
-		'show_option_none' => true,
-		'options_cb'          => 'rk_return_pages',
-	) );
-
-	$cmb_options->add_field( array(
-		'name'             => esc_html__( 'Página do Questionário de Consultoria com Layout e 3D', 'rk' ),
-		'desc'             => esc_html__('Selecione a página do Questionário de Consultoria com Layout e 3D', 'rk' ),
-		'id'               => 'rk_questionario_consultoria_layout_3d_page',
-		'type'             => 'select',
-		'show_option_none' => true,
-		'options_cb'          => 'rk_return_pages',
+		'options_cb'          => 'rk_return_formularios',
 	) );
 
 }
