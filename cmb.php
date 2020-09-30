@@ -179,4 +179,31 @@ function rk_register_theme_options_metabox() {
 		'options_cb'          => 'rk_return_pages',
 	) );
 
+	$cmb_options->add_field( array(
+		'name'             => esc_html__( 'Página do Questionário de Consultoria', 'rk' ),
+		'desc'             => esc_html__('Selecione a página do Questionário de Consultoria', 'rk' ),
+		'id'               => 'rk_questionario_consultoria_page',
+		'type'             => 'select',
+		'show_option_none' => true,
+		'options_cb'          => 'rk_return_pages',
+	) );
+
+	$cmb_options->add_field( array(
+		'name'             => esc_html__( 'Página do Questionário de Consultoria com Layout', 'rk' ),
+		'desc'             => esc_html__('Selecione a página do Questionário de Consultoria com Layout', 'rk' ),
+		'id'               => 'rk_questionario_consultoria_layout_page',
+		'type'             => 'select',
+		'show_option_none' => true,
+		'options_cb'          => 'rk_return_pages',
+	) );
+
+	$cmb_options->add_field( array(
+		'name'             => esc_html__( 'Página do Questionário de Consultoria com Layout e 3D', 'rk' ),
+		'desc'             => esc_html__('Selecione a página do Questionário de Consultoria com Layout e 3D', 'rk' ),
+		'id'               => 'rk_questionario_consultoria_layout_3d_page',
+		'type'             => 'select',
+		'show_option_none' => true,
+		'options_cb'          => 'rk_return_pages',
+	) );
+
 }

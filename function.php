@@ -95,6 +95,15 @@ function rk_return_product_quiz_options() {
 	
 	if( rk_get_option( 'rk_envio_medidas_page' ) )
 		$output[ rk_get_option( 'rk_envio_medidas_page' ) ] = esc_html__( 'Envio de medidas', 'rk' );
+	
+	if( rk_get_option( 'rk_questionario_consultoria_page' ) )
+		$output[ rk_get_option( 'rk_questionario_consultoria_page' ) ] = esc_html__('Questionário de Consultoria', 'rk' );
+	
+	if( rk_get_option( 'rk_questionario_consultoria_layout_page' ) )
+		$output[ rk_get_option( 'rk_questionario_consultoria_layout_page' ) ] = esc_html__('Questionário de Consultoria com Layout', 'rk' );
+	
+	if( rk_get_option( 'rk_questionario_consultoria_layout_3d_page' ) )
+		$output[ rk_get_option( 'rk_questionario_consultoria_layout_3d_page' ) ] = esc_html__('Questionário de Consultoria com Layout e 3D', 'rk' );
 
 	return $output;
 
