@@ -87,7 +87,7 @@ function rk_product_metabox() {
 	 */
 	$cmb_product = new_cmb2_box( array(
 		'id'            => 'rk_product_metabox',
-		'title'         => esc_html__( 'Formulários', 'rk' ),
+		'title'         => esc_html__( 'Opções Extras', 'rk' ),
 		'object_types'  => array( 'product' ), // Post type
 	) );
 
@@ -100,6 +100,13 @@ function rk_product_metabox() {
 		'options_cb' => 'rk_return_product_formularios_options',
 		// 'inline'  => true, // Toggles display to inline
 	) );
+
+    $cmb_product->add_field(array(
+        'name' => esc_html__('Imagem de Fundo da Seção "Tabela de Preços"', 'rk'),
+        'desc' => esc_html__('Upload an image or enter a URL.', 'rk'),
+        'id'   => 'rk_img_tabela_precos',
+        'type' => 'file',
+    ));
 
 }
 
