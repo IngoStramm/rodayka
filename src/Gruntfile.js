@@ -25,7 +25,8 @@ module.exports = function (grunt) {
 			},
 			all: [
 				'Gruntfile.js',
-				'<%= dirs.js %>/rk-admin-script.js'
+				'<%= dirs.js %>/rk-admin-script.js',
+				'<%= dirs.js %>/rk-frontend-script.js'
 			]
 		},
 
@@ -35,6 +36,9 @@ module.exports = function (grunt) {
 				files: {
 					'<%= dirs.js %>/rk-admin-script.min.js': [
 						'<%= dirs.js %>/rk-admin-script.js'    // Custom JavaScript
+					],
+					'<%= dirs.js %>/rk-frontend-script.min.js': [
+						'<%= dirs.js %>/rk-frontend-script.js'    // Custom JavaScript
 					]
 				}
 			}
