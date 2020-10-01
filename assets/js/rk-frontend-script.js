@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+var rk_formularios_init = function () {
     // Exibe esconde campos condicionais do formulário do Elementor
     // Usa como referência o texto no "label"
     // O label do input[radio] deve ser igual ao label do input[text] que será exibido/escondido
@@ -28,4 +28,18 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+};
+
+var rk_section_bgi = function () {
+    var secao_bgi = document.querySelectorAll('.rk-secao-bgi');
+    Array.prototype.forEach.call(secao_bgi, function (secao, i) {
+        var src = secao.getAttribute('data-rk-bgi');
+        if (src === null) { return; }
+        secao.style.backgroundImage = 'url(' + src + ')';
+    });
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+    rk_formularios_init();
+    rk_section_bgi();
 });

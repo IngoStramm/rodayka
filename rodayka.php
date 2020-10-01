@@ -4,7 +4,7 @@
  * Plugin Name: Rodayka
  * Plugin URI: https://agencialaf.com
  * Description: Este plugin é parte do site da Rodayka.
- * Version: 1.0.8
+ * Version: 1.0.9
  * Author: Ingo Stramm
  * Text Domain: rk
  * License: GPLv2
