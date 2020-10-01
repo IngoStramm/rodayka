@@ -60,7 +60,7 @@ function rk_order($order)
 
                 if (!in_array($page_id, $check_page_id)) :
 
-                    $output .= '<li><a class="btn button" target="_blank" href="' . get_page_link($page_id) . '?order=' . $order->get_id() . '">' . get_the_title($page_id) . '</a></li>';
+                    $output .= '<li><a class="btn button" target="_blank" href="' . get_post_permalink($page_id) . '?order=' . $order->get_id() . '">' . get_the_title($page_id) . '</a></li>';
                     $check_page_id[] = $page_id;
                 endif;
 
