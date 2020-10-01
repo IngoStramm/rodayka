@@ -1,11 +1,11 @@
 {
     "name": "Rodayka",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "download_url": "https://github.com/IngoStramm/rodayka/raw/master/dist/rodayka.zip",
     "homepage": "https://agencialaf.com",
     "requires": "4.7",
     "tested": "5.5",
-    "last_updated": "2020-10-01 08:58:00",
+    "last_updated": "2020-10-01 11:29:00",
     "upgrade_notice": "Atualização do Rodayka disponível",
     "author": "Ingo Stramm",
     "author_homepage": "https://agencialaf.com",
