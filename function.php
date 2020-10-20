@@ -14,19 +14,55 @@ function rk_mail_error($wp_error)
     rk_debug($wp_error);
 }
 
+function rk_default_etapa()
+{
+    $etapa = 'Novos arquivos disponíveis para download!';
+    return $etapa;
+}
+
+function rk_default_message()
+{
+    $msg = '<h3>Olá, [rk_nome]!</h3>
+        <p>Seu projeto foi atualizado para a etapa: [rk_etapa].</p>
+        <p>Existem arquivos disponíveis para download. Acesse <a href="' . get_site_url(null, '/arquivos-para-download/') . '" target="_BLANK">este link</a> para visualizá-los.</p>';
+    return $msg;
+}
+
+add_shortcode('rk_nome', 'rk_user_name');
+
+function rk_user_name()
+{
+    $user_id = isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id']) ? $_REQUEST['user_id'] : null;
+    $user = get_user_by('id', $user_id);
+    return $user->display_name;
+}
+
+add_shortcode('rk_etapa', 'rk_user_etapa');
+
+function rk_user_etapa()
+{
+    $user_id = isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id']) ? $_REQUEST['user_id'] : null;
+    $etapa = get_user_meta($user_id, 'rk_etapa', true);
+    $etapa = empty($etapa) ? rk_default_etapa() : $etapa;
+    return $etapa;
+}
+
 add_action('wp_ajax_rk_send_notification', 'rk_send_notification');
 
 function rk_send_notification()
 {
 
-    $user = wp_get_current_user();;
-
+    $user_id = isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id']) ? $_REQUEST['user_id'] : null;
+    $user = get_user_by('id', $user_id);
+    $etapa = get_user_meta($user_id, 'rk_etapa', true);
+    $etapa = empty($etapa) ? rk_default_etapa() : $etapa;
+    $mensagem = get_user_meta($user_id, 'rk_mensagem', true);
+    $mensagem = empty($mensagem) ? rk_default_message() : $mensagem;
+    $mensagem = do_shortcode($mensagem);
+    
     $to = $user->user_email;
-    $subject = 'Arquivos disponíveis para download';
-    $body = '
-		<h3>Olá, ' . $user->first_name . '!</h3>
-		<p>Existem arquivos disponíveis para download. Acesse <a href="https://rodaykasantana.com.br/arquivos-para-download/" target="_BLANK">este link</a> para visualizá-los.</p>
-	';
+    $subject = get_bloginfo('name') . ' | ' . esc_html__($etapa);
+    $body = $mensagem;
     $headers = array('Content-Type: text/html; charset=UTF-8');
     $headers[] = 'From: Rodayka <contato@rodaykasantana.com.br>';
     $headers[] .= 'Bcc: ingo@agencialaf.com';
@@ -116,9 +152,13 @@ function rk_return_product_formularios()
     return $output;
 }
 
-// add_action( 'wp_head', 'rk_test' );
+add_action('admin_head', 'rk_test');
 
 function rk_test()
 {
-    rk_debug(rk_return_formularios());
+    $user_id = isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id']) ? $_REQUEST['user_id'] : null;
+    $user = get_user_by('id', $user_id);
+    $etapa = get_user_meta($user_id, 'rk_etapa', true);
+    $mensagem = get_user_meta($user_id, 'rk_mensagem', true);
+    // rk_debug($mensagem);
 }

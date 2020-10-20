@@ -9,7 +9,7 @@ function rk_frontend_scripts()
         wp_enqueue_script('rk-livereload', 'http://localhost:35729/livereload.js?snipver=1', array(), null, true);
     endif;
 
-    $min = (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1','::1', '10.0.0.3'))) ? '' : '.min';
+    $min = (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1', '10.0.0.3'))) ? '' : '.min';
 
     // wp_enqueue_style( 'rk-style', RK_URL . 'assets/css/style.css', array(), false, 'all' );
 

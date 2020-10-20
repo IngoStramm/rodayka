@@ -3,16 +3,18 @@ jQuery( function( $ ) {
 	var rk_btn_notificacao = function() {
 		$( '.rk-send-user-file-notification' ).click(function( e ) {
 			e.preventDefault();
-			console.log( 'click: 3' );
+			console.log( 'click: 4' );
 			var btn = $( this );
 			var btn_text = btn.find( '.rk-btn-text' );
-			var original_btn_text = btn_text.text();
+            var original_btn_text = btn_text.text();
+            var user_id = $('#user_id').val();
 			btn_text.text( 'Enviando...' );
 			btn.addClass( 'rk-btn-loading' ).attr( 'disabled', 'disabled' );
 			$( '.rk-notification-status' ).remove();
 
 			var data = {
-				'action': 'rk_send_notification'
+                'action': 'rk_send_notification',
+                'user_id': user_id
 				// 'whatever': ajax_object.we_value      // We pass php values differently!
 			};
 			// We can also pass the url value separately from ajaxurl for front end AJAX implementations
