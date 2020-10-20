@@ -77,7 +77,7 @@ function rk_register_user_profile_metabox()
         'attributes' => array(
             'required' => 'required',
         ),
-        'default'   => 'rk_default_etapa'
+        'default_cb'   => 'rk_default_etapa'
     ));
 
     $cmb_user->add_field(array(
@@ -88,7 +88,7 @@ function rk_register_user_profile_metabox()
         'options' => array(
             'textarea_rows' => 5,
         ),
-        'default'   => 'rk_default_message'
+        'default_cb'   => 'rk_default_message'
     ));
 
     $cmb_user->add_field(array(
