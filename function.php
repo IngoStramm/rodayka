@@ -97,26 +97,24 @@ function rk_return_product_formularios_options()
 {
     $output    = [];
 
-    if (rk_get_option('rk_questionario_consultoria_page'))
-    $output[rk_get_option('rk_questionario_consultoria_page')] = esc_html__('Questionário de Consultoria', 'rk');
+    $args = [
+        'post_type'         => 'formulario',
+        'posts_per_page'    => -1,
+        'order'             => 'ASC',
+        'orderby'           => 'title'
+    ];
 
-    if (rk_get_option('rk_questionario_consultoria_layout_page'))
-    $output[rk_get_option('rk_questionario_consultoria_layout_page')] = esc_html__('Questionário de Consultoria com Layout', 'rk');
+    $the_query = new WP_Query($args);
 
-    if (rk_get_option('rk_questionario_consultoria_layout_3d_page'))
-    $output[rk_get_option('rk_questionario_consultoria_layout_3d_page')] = esc_html__('Questionário de Consultoria com Layout e 3D', 'rk');
-
-    if (rk_get_option('rk_book_estilos_page'))
-        $output[rk_get_option('rk_book_estilos_page')] = esc_html__('Book de Estilos', 'rk');
-
-    if (rk_get_option('rk_quiz_estilos_page'))
-        $output[rk_get_option('rk_quiz_estilos_page')] = esc_html__('Quiz de Estilos', 'rk');
-
-    if (rk_get_option('rk_envio_fotos_page'))
-        $output[rk_get_option('rk_envio_fotos_page')] = esc_html__('Envio de fotos', 'rk');
-
-    if (rk_get_option('rk_envio_medidas_page'))
-        $output[rk_get_option('rk_envio_medidas_page')] = esc_html__('Envio de medidas', 'rk');
+    if (
+        $the_query->have_posts()
+    ) {
+        while ($the_query->have_posts()) {
+            $the_query->the_post();
+            $output[get_the_ID()] = get_the_title();
+        }
+    }
+    wp_reset_postdata();
 
     return $output;
 }
