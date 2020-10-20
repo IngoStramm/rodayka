@@ -97,7 +97,7 @@ function rk_product_metabox() {
 		'id'      => 'rk_formularios',
 		'type'    => 'multicheck',
 		// 'multiple' => true, // Store values in individual rows
-		'options_cb' => 'rk_return_product_formularios_options',
+		'options_cb' => 'rk_return_product_formularios',
 		// 'inline'  => true, // Toggles display to inline
 	) );
 

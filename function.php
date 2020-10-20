@@ -42,9 +42,6 @@ add_action('woocommerce_order_details_after_order_table', 'rk_order', 10);
 
 function rk_order($order)
 {
-    // rk_debug( rk_return_product_formularios_options() );
-    // rk_debug( $item );
-    // rk_debug( $order->get_order_item_totals() );
     $products = $order->get_items();
 
     $output = '';
@@ -93,7 +90,7 @@ function rk_return_formularios()
     return $output;
 }
 
-function rk_return_product_formularios_options()
+function rk_return_product_formularios()
 {
     $output    = [];
 
@@ -101,7 +98,7 @@ function rk_return_product_formularios_options()
         'post_type'         => 'formulario',
         'posts_per_page'    => -1,
         'order'             => 'ASC',
-        'orderby'           => 'title'
+        'orderby'           => 'menu_order'
     ];
 
     $the_query = new WP_Query($args);
