@@ -47,6 +47,37 @@ function rk_user_etapa()
     return $etapa;
 }
 
+add_shortcode('rk_post_title', 'rk_post_title_shortcode');
+
+function rk_post_title_shortcode()
+{
+    if (is_account_page()) {
+        $endpoint = WC()->query->get_current_endpoint();
+        switch ($endpoint) {
+            case "downloads":
+                $endpoint_title = "Downloads";
+                break;
+            case "orders":
+                $endpoint_title = "Orders";
+                break;
+            case "edit-address":
+                $endpoint_title = "Addresses";
+                break;
+            case "edit-account":
+                $endpoint_title = "Account";
+                break;
+            default:
+                $endpoint_title = "My Account";
+                break;
+        }
+        ob_start();
+        return $endpoint_title;
+        ob_get_clean();
+    } else {
+        return get_the_title();
+    }
+}
+
 add_action('wp_ajax_rk_send_notification', 'rk_send_notification');
 
 function rk_send_notification()
@@ -59,7 +90,7 @@ function rk_send_notification()
     $mensagem = get_user_meta($user_id, 'rk_mensagem', true);
     $mensagem = empty($mensagem) ? rk_default_message() : $mensagem;
     $mensagem = do_shortcode($mensagem);
-    
+
     $to = $user->user_email;
     $subject = get_bloginfo('name') . ' | ' . esc_html__($etapa);
     $body = $mensagem;
@@ -152,13 +183,9 @@ function rk_return_product_formularios()
     return $output;
 }
 
-add_action('admin_head', 'rk_test');
+// add_action('wp_head', 'rk_test');
 
 function rk_test()
 {
-    $user_id = isset($_REQUEST['user_id']) && !empty($_REQUEST['user_id']) ? $_REQUEST['user_id'] : null;
-    $user = get_user_by('id', $user_id);
-    $etapa = get_user_meta($user_id, 'rk_etapa', true);
-    $mensagem = get_user_meta($user_id, 'rk_mensagem', true);
-    // rk_debug($mensagem);
+    rk_debug(do_shortcode('[rk_post_title]'));
 }
