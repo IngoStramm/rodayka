@@ -52,26 +52,52 @@ add_shortcode('rk_post_title', 'rk_post_title_shortcode');
 function rk_post_title_shortcode()
 {
     if (is_account_page()) {
+        global $wp;
         $endpoint = WC()->query->get_current_endpoint();
         switch ($endpoint) {
-            case "downloads":
-                $endpoint_title = "Downloads";
+            case 'order-pay':
+                $title = __('Pay for order', 'woocommerce');
                 break;
-            case "orders":
-                $endpoint_title = "Orders";
+            case 'order-received':
+                $title = __('Order received', 'woocommerce');
                 break;
-            case "edit-address":
-                $endpoint_title = "Addresses";
+            case 'orders':
+                if (!empty($wp->query_vars['orders'])) {
+                    /* translators: %s: page */
+                    $title = sprintf(__('Orders (page %d)', 'woocommerce'), intval($wp->query_vars['orders']));
+                } else {
+                    $title = __('Orders', 'woocommerce');
+                }
                 break;
-            case "edit-account":
-                $endpoint_title = "Account";
+            case 'view-order':
+                $order = wc_get_order($wp->query_vars['view-order']);
+                /* translators: %s: order number */
+                $title = ($order) ? sprintf(__('Order #%s', 'woocommerce'), $order->get_order_number()) : '';
+                break;
+            case 'downloads':
+                $title = __('Downloads', 'woocommerce');
+                break;
+            case 'edit-account':
+                $title = __('Account details', 'woocommerce');
+                break;
+            case 'edit-address':
+                $title = __('Addresses', 'woocommerce');
+                break;
+            case 'payment-methods':
+                $title = __('Payment methods', 'woocommerce');
+                break;
+            case 'add-payment-method':
+                $title = __('Add payment method', 'woocommerce');
+                break;
+            case 'lost-password':
+                $title = __('Lost password', 'woocommerce');
                 break;
             default:
-                $endpoint_title = "My Account";
+                $title = __('My account', 'woocommerce');
                 break;
         }
         ob_start();
-        return $endpoint_title;
+        return $title;
         ob_get_clean();
     } else {
         return get_the_title();
