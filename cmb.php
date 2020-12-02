@@ -30,11 +30,11 @@ function rk_get_option($key = '', $default = false)
 {
     if (function_exists('cmb2_get_option')) {
         // Use cmb2_get_option as it passes through some key filters.
-        return cmb2_get_option('rk_theme_options', $key, $default);
+        return cmb2_get_option('rk_options', $key, $default);
     }
 
     // Fallback to get_option if CMB2 is not loaded yet.
-    $opts = get_option('rk_theme_options', $default);
+    $opts = get_option('rk_options', $default);
 
     $val = $default;
 
@@ -131,5 +131,59 @@ function rk_product_metabox()
         'desc' => esc_html__('Upload an image or enter a URL.', 'rk'),
         'id'   => 'rk_img_tabela_precos',
         'type' => 'file',
+    ));
+}
+
+
+add_action('cmb2_admin_init', 'rk_register_options_metabox');
+/**
+ * Hook in and register a metabox to handle a theme options page and adds a menu item.
+ */
+function rk_register_options_metabox()
+{
+
+    /**
+     * Registers options page menu item and form.
+     */
+    $cmb_options = new_cmb2_box(array(
+        'id'           => 'rk_options_page',
+        'title'        => esc_html__('Configurações Rodayka', 'rk'),
+        'object_types' => array('options-page'),
+
+        /*
+		 * The following parameters are specific to the options-page box
+		 * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
+		 */
+
+        'option_key'      => 'rk_options', // The option key and admin menu page slug.
+        'icon_url'        => 'dashicons-palmtree', // Menu icon. Only applicable if 'parent_slug' is left empty.
+        // 'menu_title'      => esc_html__( 'Options', 'rk' ), // Falls back to 'title' (above).
+        'parent_slug'     => 'options-general.php', // Make options page a submenu item of the themes menu.
+        // 'capability'      => 'manage_options', // Cap required to view options-page.
+        // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
+        // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
+        // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
+        // 'save_button'     => esc_html__( 'Save Theme Options', 'rk' ), // The text for the options-page save button. Defaults to 'Save'.
+        // 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
+        // 'message_cb'      => 'yourprefix_options_page_message_callback',
+        // 'tab_group'       => '', // Tab-group identifier, enables options page tab navigation.
+        // 'tab_title'       => null, // Falls back to 'title' (above).
+        // 'autoload'        => false, // Defaults to true, the options-page option will be autloaded.
+    ));
+
+    /**
+     * Options fields ids only need
+     * to be unique within this box.
+     * Prefix is not needed.
+     */
+    $cmb_options->add_field(array(
+        'name'    => esc_html__('Página de Agendamento', 'rk'),
+        'desc'    => esc_html__('Selecione de Agendamento da Reunião de Briefing', 'rk'),
+        'id'      => 'rk_appointment_page',
+        'type'    => 'select',
+        'show_option_none' => true,
+        // 'multiple' => true, // Store values in individual rows
+        'options_cb' => 'rk_return_pages',
+        // 'inline'  => true, // Toggles display to inline
     ));
 }

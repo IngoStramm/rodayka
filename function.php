@@ -159,28 +159,14 @@ function rk_order($order)
         endif;
 
     endforeach;
+
+    $rk_appointment_page_id = rk_get_option('rk_appointment_page');
+    if ($rk_appointment_page_id)
+        $output .= '<li><a class="btn button" target="_blank" href="' . get_post_permalink($rk_appointment_page_id) . '">' . get_the_title($rk_appointment_page_id) . '</a></li>';
+        
     $output .= '</ul>';
 
     echo $output;
-}
-
-function rk_return_formularios()
-{
-    $formularios = get_posts(
-        array(
-            'post_type'         => 'formulario',
-            'orderby'           => 'menu_order',
-            'order'             => 'ASC',
-            'numberposts'       => -1
-        )
-    );
-    $output = [];
-
-    foreach ($formularios as $formulario) :
-        $output[$formulario->ID] = $formulario->post_title;
-    endforeach;
-
-    return $output;
 }
 
 function rk_return_product_formularios()
@@ -192,6 +178,33 @@ function rk_return_product_formularios()
         'posts_per_page'    => -1,
         'order'             => 'ASC',
         'orderby'           => 'menu_order'
+    ];
+
+    $the_query = new WP_Query($args);
+
+    if (
+        $the_query->have_posts()
+    ) {
+        while ($the_query->have_posts()) {
+            $the_query->the_post();
+            $output[get_the_ID()] = get_the_title();
+        }
+    }
+    wp_reset_postdata();
+
+    return $output;
+}
+
+function rk_return_pages()
+{
+    $output    = [];
+
+    $args = [
+        'post_type'         => 'page',
+        'posts_per_page'    => -1,
+        'order'             => 'ASC',
+        'orderby'           => 'title',
+        'status'            => 'published'
     ];
 
     $the_query = new WP_Query($args);
