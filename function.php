@@ -7,6 +7,11 @@ function rk_debug($debug)
     echo '</pre>';
 }
 
+// get the the role object
+$admin_role = get_role('editor');
+// grant the unfiltered_html capability
+$admin_role->add_cap('ssa_manage_appointments', true);
+
 add_action('wp_mail_failed', 'rk_mail_error', 10, 1);
 
 function rk_mail_error($wp_error)
