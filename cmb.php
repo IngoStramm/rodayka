@@ -178,7 +178,7 @@ function rk_register_options_metabox()
      */
     $cmb_options->add_field(array(
         'name'    => esc_html__('Página de Agendamento', 'rk'),
-        'desc'    => esc_html__('Selecione de Agendamento da Reunião de Briefing', 'rk'),
+        'desc'    => esc_html__('Selecione a página Agendamento da Reunião de Briefing', 'rk'),
         'id'      => 'rk_appointment_page',
         'type'    => 'select',
         'show_option_none' => true,

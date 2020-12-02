@@ -162,8 +162,8 @@ function rk_order($order)
 
     $rk_appointment_page_id = rk_get_option('rk_appointment_page');
     if ($rk_appointment_page_id)
-        $output .= '<li><a class="btn button" target="_blank" href="' . get_post_permalink($rk_appointment_page_id) . '">' . get_the_title($rk_appointment_page_id) . '</a></li>';
-        
+        $output .= '<li><a class="btn button" target="_blank" href="' . get_permalink($rk_appointment_page_id) . '">' . get_the_title($rk_appointment_page_id) . '</a></li>';
+
     $output .= '</ul>';
 
     echo $output;
